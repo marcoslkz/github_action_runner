@@ -1,0 +1,23 @@
+version: '3'
+services:
+  worker:
+    image: myoung34/github-runner:ubuntu-jammy
+    #latest
+    environment:
+      - RUNNER_WORKDIR=/tmp/runner/work
+      - RUNNER_SCOPE=org
+      - LABELS=linux
+      - DISABLE_AUTO_UPDATE=true
+      - ACCESS_TOKEN
+      - RUNNER_NAME
+      - ORG_NAME
+      - RUN_AS_ROOT=false
+      #- RUNNER_GROUP=docker
+      #- REPO_URL
+      #- RUNNER_SCOPE: 'repo'
+    security_opt:
+      - label:disable
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '/tmp/runner:/tmp/runner'
+      - '/opt/files:/opt/files'
